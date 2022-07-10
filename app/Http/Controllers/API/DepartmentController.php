@@ -36,6 +36,10 @@ class DepartmentController extends Controller
 
         $dep = Department::select('id','name')->paginate($pageSizer);
 
+        //test relation
+        //$dep = Department::with('officers_ref')->get();
+         $dep = Department::with('officers_ref')->paginate($pageSizer);
+
         return response()->json([
                     'data' => $dep
                 ],200);

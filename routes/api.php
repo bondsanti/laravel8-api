@@ -4,6 +4,7 @@ use App\Http\Controllers\API\DepartmentController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\UserController;
+use App\Http\Controllers\OfficerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +26,7 @@ use App\Http\Controllers\API\UserController;
 
 Route::apiResource('/user',UserController::class);
 Route::apiResource('/department',DepartmentController::class);
-
 //search
 Route::get('/search/department',[DepartmentController::class,'search']);
+
+Route::apiResource('/officer',OfficerController::class);

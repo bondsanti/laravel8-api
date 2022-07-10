@@ -19,4 +19,15 @@ class Department extends Model
     //public $timestamps = false;
 
 
+
+    //relation one to many with officerModel
+    public function officers_ref()
+    {
+
+        //แต่ละแผนก มีพนักงานคนไหนบ้าง
+        //return $this->hasMany(Officer::class); //แบบตามกฏ
+        return $this->hasMany(Officer::class,'department_id','id'); //กรณีชื่อฟิลด์ไม่ตรงกฏ
+    }
+
+
 }
