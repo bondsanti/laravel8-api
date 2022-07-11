@@ -34,7 +34,7 @@ class DepartmentController extends Controller
         $page_size = request()->query('page_size');
         $pageSizer = $page_size == null ? 5 : $page_size;
 
-        $dep = Department::select('id','name')->paginate($pageSizer);
+       // $dep = Department::select('id','name')->paginate($pageSizer);
 
         //test relation
         //$dep = Department::with('officers_ref')->get();

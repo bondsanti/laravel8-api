@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -14,7 +15,11 @@ class UserController extends Controller
      */
     public function index()
     {
-        return "Hello Index User";
+        $user = User::with('officer_ref')->get();
+
+        return response()->json([
+            'data'=>$user
+        ]);
     }
 
     /**
