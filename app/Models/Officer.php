@@ -11,6 +11,22 @@ class Officer extends Model
 
     protected $table ='officers';
 
+    //เพิ่ม getter ไป Json
+    protected $appends = ['fullname','age'];
+
+    //getters (Accessor) สร้างฟิลด์เอง เพื่อส่งให้ ไคเอ้น
+   public function getFullnameAttribute()
+   {
+     //fullname
+    return $this->firstname.' '.$this->lastname;
+   }
+
+    public function getAgeAttribute()
+    {
+            //age
+    return now()->diffInYears($this->dob);
+    }
+
         //many to one
     public function department_ref()
     {
@@ -18,4 +34,10 @@ class Officer extends Model
         //return $this->belongsTo(Department::class);//ตามกฏ
         return $this->belongsTo(Department::class,'department_id','id'); //กรณีชื่อฟิลด์ไม่ตรงกฏ
     }
+    // revert one to one
+    public function user_ref(){
+        //return $this->belongsTo(User::class);//ตามกฏ
+        return $this->belongsTo(User::class,'user_id','id');
+    }
+
 }

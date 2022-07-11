@@ -41,4 +41,10 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    //one to one
+    public function officer_ref(){
+        //return $this->hasOne(Officer::class); //ตามกฏ
+        return $this->hasOne(Officer::class,'user_id','id'); //กรณีชื่อฟิลด์ไม่ตรงกฏ
+    }
 }

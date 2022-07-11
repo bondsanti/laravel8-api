@@ -14,7 +14,8 @@ class OfficerController extends Controller
      */
     public function index()
     {
-        $officer = Officer::with('department_ref:id,name')->get();
+       // $officer = Officer::with('department_ref:id,name')->get();
+       $officer = Officer::with('department_ref:id,name','user_ref:id,email')->get();
         return response()->json([
             'data'=> $officer
         ]);
