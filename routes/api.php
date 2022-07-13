@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\DepartmentController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -26,7 +27,13 @@ use App\Http\Controllers\OfficerController;
 
 Route::apiResource('/user',UserController::class);
 Route::apiResource('/department',DepartmentController::class);
+Route::apiResource('/officer',OfficerController::class);
+
+
 //search
 Route::get('/search/department',[DepartmentController::class,'search']);
 
-Route::apiResource('/officer',OfficerController::class);
+Route::post('/register',[AuthController::class,'register']);
+Route::post('/login',[AuthController::class,'login']);
+Route::post('/logout',[AuthController::class,'logout'])->middleware('auth:sanctum');
+Route::get('/profile',[AuthController::class,'profile'])->middleware('auth:sanctum');
