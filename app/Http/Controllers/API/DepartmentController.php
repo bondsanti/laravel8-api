@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Department;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Validator;
 
 class DepartmentController extends Controller
 {
@@ -54,6 +55,21 @@ class DepartmentController extends Controller
      */
     public function store(Request $request)
     {
+        $validator = Validator::make($request->all(),[
+            'name' => 'required|unique:departments',
+        ],[
+            'name.required'=>'ป้อนข้อมูลชื่อแผนกด้วย',
+            'name.unique'=>'ชื่อแผนกซ้ำ',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'errors' => [
+                    'message' => $validator->errors()
+                ]
+            ], 422);
+        }
+
         $dep = new Department();
         $dep->name = $request->name;
         $dep->save();
@@ -99,7 +115,7 @@ class DepartmentController extends Controller
         if($id!=$request->id){
             return response()->json([
                 'errors' => [
-                    'message'=>'ไม่สามารถอัพเดทข้อมูลได้..'
+                    'message'=>'ไม่สามารถอัพเดทข้อมูลได้ ID ไม่ถูกต้อง..'
                     ]
             ],400);
         }
