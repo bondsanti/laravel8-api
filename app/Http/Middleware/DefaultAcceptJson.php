@@ -16,6 +16,9 @@ class DefaultAcceptJson
      */
     public function handle(Request $request, Closure $next)
     {
+        //set application/json
+        $request->headers->set('accept','application/json',true);
+
         return $next($request);
     }
 }
